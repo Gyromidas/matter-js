@@ -5832,7 +5832,6 @@ var Common = __webpack_require__(0);
         };
         
         mouse.mousedown = function(event) {
-			console.log('testing matter')
             var position = Mouse._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio),
                 touches = event.changedTouches;
 
@@ -8387,6 +8386,7 @@ var Bounds = __webpack_require__(1);
 
         if (mouse.button === 0) {
             if (!constraint.bodyB) {
+                outer:
                 for (var i = 0; i < bodies.length; i++) {
                     body = bodies[i];
                     if (Bounds.contains(body.bounds, mouse.position) 
@@ -8402,7 +8402,7 @@ var Bounds = __webpack_require__(1);
                                 Sleeping.set(body, false);
                                 Events.trigger(mouseConstraint, 'startdrag', { mouse: mouse, body: body });
 
-                                break;
+                                break outer;
                             }
                         }
                     }
