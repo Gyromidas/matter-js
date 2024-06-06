@@ -8387,7 +8387,7 @@ var Bounds = __webpack_require__(1);
         if (mouse.button === 0) {
             if (!constraint.bodyB) {
                 outer:
-                for (var i = 0; i < bodies.length; i++) {
+                for (var i = bodies.length-1; i >= 0; i--) {
                     body = bodies[i];
                     if (Bounds.contains(body.bounds, mouse.position) 
                             && Detector.canCollide(body.collisionFilter, mouseConstraint.collisionFilter)) {
