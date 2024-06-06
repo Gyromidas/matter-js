@@ -97,6 +97,7 @@ var Bounds = require('../geometry/Bounds');
 
         if (mouse.button === 0) {
             if (!constraint.bodyB) {
+                outer:
                 for (var i = 0; i < bodies.length; i++) {
                     body = bodies[i];
                     if (Bounds.contains(body.bounds, mouse.position) 
@@ -112,7 +113,7 @@ var Bounds = require('../geometry/Bounds');
                                 Sleeping.set(body, false);
                                 Events.trigger(mouseConstraint, 'startdrag', { mouse: mouse, body: body });
 
-                                break;
+                                break outer;
                             }
                         }
                     }

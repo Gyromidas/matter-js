@@ -60,7 +60,6 @@ var Common = require('../core/Common');
         };
         
         mouse.mousedown = function(event) {
-			console.log('testing matter')
             var position = Mouse._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio),
                 touches = event.changedTouches;
 
