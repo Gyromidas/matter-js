@@ -57,6 +57,7 @@ var Bounds = require('../geometry/Bounds');
             pair,
             collision,
             bodyA,
+            damage,
             bodyB,
             normal,
             contactShare,
@@ -108,6 +109,14 @@ var Bounds = require('../geometry/Bounds');
                 contactShare = positionDampen / bodyB.totalContacts;
                 bodyB.positionImpulse.x -= normal.x * positionImpulse * contactShare;
                 bodyB.positionImpulse.y -= normal.y * positionImpulse * contactShare;
+            }
+
+            damage = Math.sqrt((bodyA.velocity['x'] + bodyB.velocity['x'])**2 + (bodyA.velocity['y'] + bodyB.velocity['y'])**2)
+            if (bodyA.isDamageable){
+                bodyA.damage += damage
+            }
+            if (bodyB.isDamageable){
+                bodyB.damage += damage
             }
         }
     };

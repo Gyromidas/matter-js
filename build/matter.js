@@ -1646,6 +1646,9 @@ var Axes = __webpack_require__(11);
             density: 0.001,
             restitution: 0,
             friction: 0.1,
+            isDamageable: false,
+            damage: 0,
+            breakingPoint: 1000,
             frictionStatic: 0.5,
             frictionAir: 0.01,
             collisionFilter: {
@@ -7005,6 +7008,7 @@ var Bounds = __webpack_require__(1);
             pair,
             collision,
             bodyA,
+            damage,
             bodyB,
             normal,
             contactShare,
@@ -7056,6 +7060,14 @@ var Bounds = __webpack_require__(1);
                 contactShare = positionDampen / bodyB.totalContacts;
                 bodyB.positionImpulse.x -= normal.x * positionImpulse * contactShare;
                 bodyB.positionImpulse.y -= normal.y * positionImpulse * contactShare;
+            }
+
+            damage = Math.sqrt((bodyA.velocity['x'] + bodyB.velocity['x'])**2 + (bodyA.velocity['y'] + bodyB.velocity['y'])**2)
+            if (bodyA.isDamageable){
+                bodyA.damage += damage
+            }
+            if (bodyB.isDamageable){
+                bodyB.damage += damage
             }
         }
     };
