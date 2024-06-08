@@ -237,7 +237,7 @@ var Body = require('./Body');
     Composite.addBody = function(composite, body) {
         addbody: {
             for(let i=0; i<composite.bodies.length;i++){
-                if(composite.bodies[i].depth > bodies.depth){
+                if(composite.bodies[i].depth > body.depth){
                     composite.bodies.splice(i, 0, body)
                     break addbody
                 }

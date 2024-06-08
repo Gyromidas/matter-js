@@ -3427,7 +3427,7 @@ var Body = __webpack_require__(4);
     Composite.addBody = function(composite, body) {
         addbody: {
             for(let i=0; i<composite.bodies.length;i++){
-                if(composite.bodies[i].depth > bodies.depth){
+                if(composite.bodies[i].depth > body.depth){
                     composite.bodies.splice(i, 0, body)
                     break addbody
                 }
