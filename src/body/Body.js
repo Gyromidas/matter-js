@@ -66,6 +66,7 @@ var Axes = require('../geometry/Axes');
             isDamageable: false,
             damage: 0,
             breakingPoint: 1000,
+            depth: 0,
             frictionStatic: 0.5,
             frictionAir: 0.01,
             collisionFilter: {

@@ -1649,6 +1649,7 @@ var Axes = __webpack_require__(11);
             isDamageable: false,
             damage: 0,
             breakingPoint: 1000,
+            depth: 0,
             frictionStatic: 0.5,
             frictionAir: 0.01,
             collisionFilter: {
@@ -3424,7 +3425,15 @@ var Body = __webpack_require__(4);
      * @return {composite} The original composite with the body added
      */
     Composite.addBody = function(composite, body) {
-        composite.bodies.push(body);
+        addbody: {
+            for(let i=0; i<composite.bodies.length;i++){
+                if(composite.bodies[i].depth > bodies.depth){
+                    composite.bodies.splice(i, 0, body)
+                    break addbody
+                }
+            }
+            composite.bodies.push(body)
+        }
         Composite.setModified(composite, true, true, false);
         return composite;
     };

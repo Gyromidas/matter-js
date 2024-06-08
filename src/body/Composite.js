@@ -235,7 +235,15 @@ var Body = require('./Body');
      * @return {composite} The original composite with the body added
      */
     Composite.addBody = function(composite, body) {
-        composite.bodies.push(body);
+        addbody: {
+            for(let i=0; i<composite.bodies.length;i++){
+                if(composite.bodies[i].depth > bodies.depth){
+                    composite.bodies.splice(i, 0, body)
+                    break addbody
+                }
+            }
+            composite.bodies.push(body)
+        }
         Composite.setModified(composite, true, true, false);
         return composite;
     };
