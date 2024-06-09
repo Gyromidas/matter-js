@@ -97,7 +97,6 @@ var Bounds = require('../geometry/Bounds');
 
         if (mouse.button === 0) {
             if (!constraint.bodyB) {
-                outer:
                 for (var i = bodies.length-1; i >= 0; i--) {
                     body = bodies[i];
                     if (Bounds.contains(body.bounds, mouse.position) 
@@ -112,13 +111,13 @@ var Bounds = require('../geometry/Bounds');
 
                                 Sleeping.set(body, false);
                                 Events.trigger(mouseConstraint, 'startdrag', { mouse: mouse, body: body });
-
-                                break outer;
+                                document.body.style.cursor = body.pointer;
+                                return
                             }
                         }
                     }
                 }
-                document.body.style.cursor = body.pointer;
+                
             } else {
                 Sleeping.set(constraint.bodyB, false);
                 constraint.pointA = mouse.position;
@@ -129,6 +128,22 @@ var Bounds = require('../geometry/Bounds');
 
             if (body)
                 Events.trigger(mouseConstraint, 'enddrag', { mouse: mouse, body: body });
+
+            for (var i = bodies.length-1; i >= 0; i--) {
+                body = bodies[i];
+                if (Bounds.contains(body.bounds, mouse.position) 
+                        && Detector.canCollide(body.collisionFilter, mouseConstraint.collisionFilter)) {
+                    for (var j = body.parts.length > 1 ? 1 : 0; j < body.parts.length; j++) {
+                        var part = body.parts[j];
+                        if (Vertices.contains(part.vertices, mouse.position)) {
+                            document.body.style.cursor = body.pointer;
+                            return
+                        }
+                    }
+                }
+            }
+
+            document.body.style.cursor = "default";
         }
     };
 
