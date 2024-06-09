@@ -118,6 +118,7 @@ var Bounds = require('../geometry/Bounds');
                         }
                     }
                 }
+                document.body.style.cursor = body.pointer;
             } else {
                 Sleeping.set(constraint.bodyB, false);
                 constraint.pointA = mouse.position;

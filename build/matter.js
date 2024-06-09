@@ -1650,6 +1650,7 @@ var Axes = __webpack_require__(11);
             damage: 0,
             breakingPoint: 1000,
             depth: 0,
+            pointer: 'default',
             frictionStatic: 0.5,
             frictionAir: 0.01,
             collisionFilter: {
@@ -8428,6 +8429,7 @@ var Bounds = __webpack_require__(1);
                         }
                     }
                 }
+                document.body.style.cursor = body.pointer;
             } else {
                 Sleeping.set(constraint.bodyB, false);
                 constraint.pointA = mouse.position;
