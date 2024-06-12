@@ -65,6 +65,7 @@ var Axes = require('../geometry/Axes');
             friction: 0.1,
             isDamageable: false,
             damage: 0,
+            hovered:false,
             breakingPoint: 1000,
             depth: 0,
             pointer: 'default',
