@@ -129,9 +129,9 @@ var Bounds = require('../geometry/Bounds');
             if (body)
                 Events.trigger(mouseConstraint, 'enddrag', { mouse: mouse, body: body });
 
-            for (var i = bodies.length-1; i >= 0; i--) {
-                bodies[i].hovered = false
-            }
+            //for (var i = bodies.length-1; i >= 0; i--) {
+            //    bodies[i].hovered = false
+            //}
 
             for (var i = bodies.length-1; i >= 0; i--) {
                 body = bodies[i];
@@ -141,7 +141,7 @@ var Bounds = require('../geometry/Bounds');
                         var part = body.parts[j];
                         if (Vertices.contains(part.vertices, mouse.position)) {
                             document.body.style.cursor = body.pointer;
-                            bodies[i].hovered = true
+                            //bodies[i].hovered = true
                             return
                         }
                     }

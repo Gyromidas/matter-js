@@ -8441,9 +8441,9 @@ var Bounds = __webpack_require__(1);
             if (body)
                 Events.trigger(mouseConstraint, 'enddrag', { mouse: mouse, body: body });
 
-            for (var i = bodies.length-1; i >= 0; i--) {
-                bodies[i].hovered = false
-            }
+            //for (var i = bodies.length-1; i >= 0; i--) {
+            //    bodies[i].hovered = false
+            //}
 
             for (var i = bodies.length-1; i >= 0; i--) {
                 body = bodies[i];
@@ -8453,7 +8453,7 @@ var Bounds = __webpack_require__(1);
                         var part = body.parts[j];
                         if (Vertices.contains(part.vertices, mouse.position)) {
                             document.body.style.cursor = body.pointer;
-                            bodies[i].hovered = true
+                            //bodies[i].hovered = true
                             return
                         }
                     }
