@@ -8389,7 +8389,7 @@ var Bounds = __webpack_require__(1);
         Events.on(engine, 'beforeUpdate', function() {
             var allBodies = Composite.allBodies(engine.world);
             MouseConstraint.update(mouseConstraint, allBodies);
-            //MouseConstraint._triggerEvents(mouseConstraint);
+            MouseConstraint._triggerEvents(mouseConstraint);
         });
 
         return mouseConstraint;
@@ -8422,8 +8422,7 @@ var Bounds = __webpack_require__(1);
                                 constraint.angleB = body.angle;
 
                                 Sleeping.set(body, false);
-                                //Events.trigger(mouseConstraint, 'startdrag', { mouse: mouse, body: body });
-                                document.body.style.cursor = body.pointer;
+                                Events.trigger(mouseConstraint, 'startdrag', { mouse: mouse, body: body });
                                 return
                             }
                         }
@@ -8440,27 +8439,6 @@ var Bounds = __webpack_require__(1);
 
             if (body)
                 Events.trigger(mouseConstraint, 'enddrag', { mouse: mouse, body: body });
-
-            //for (var i = bodies.length-1; i >= 0; i--) {
-            //    bodies[i].hovered = false
-            //}
-
-            for (var i = bodies.length-1; i >= 0; i--) {
-                body = bodies[i];
-                if (Bounds.contains(body.bounds, mouse.position) 
-                        && Detector.canCollide(body.collisionFilter, mouseConstraint.collisionFilter)) {
-                    for (var j = body.parts.length > 1 ? 1 : 0; j < body.parts.length; j++) {
-                        var part = body.parts[j];
-                        if (Vertices.contains(part.vertices, mouse.position)) {
-                            document.body.style.cursor = body.pointer;
-                            //bodies[i].hovered = true
-                            return
-                        }
-                    }
-                }
-            }
-
-            document.body.style.cursor = "default";
         }
     };
 
