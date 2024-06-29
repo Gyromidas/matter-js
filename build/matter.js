@@ -8389,7 +8389,7 @@ var Bounds = __webpack_require__(1);
         Events.on(engine, 'beforeUpdate', function() {
             var allBodies = Composite.allBodies(engine.world);
             MouseConstraint.update(mouseConstraint, allBodies);
-            MouseConstraint._triggerEvents(mouseConstraint);
+            //MouseConstraint._triggerEvents(mouseConstraint);
         });
 
         return mouseConstraint;
