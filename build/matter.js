@@ -8422,7 +8422,7 @@ var Bounds = __webpack_require__(1);
                                 constraint.angleB = body.angle;
 
                                 Sleeping.set(body, false);
-                                Events.trigger(mouseConstraint, 'startdrag', { mouse: mouse, body: body });
+                                //Events.trigger(mouseConstraint, 'startdrag', { mouse: mouse, body: body });
                                 document.body.style.cursor = body.pointer;
                                 return
                             }
