@@ -5972,10 +5972,10 @@ var Common = __webpack_require__(0);
         
         if (touches) {
             x = touches[0].pageX - elementBounds.left - scrollX;
-            y = element.height/window.devicePixelRatio - touches[0].pageY - elementBounds.top - scrollY;
+            y = element.height/window.devicePixelRatio*2 - touches[0].pageY - elementBounds.top - scrollY;
         } else {
             x = event.pageX - elementBounds.left - scrollX;
-            y = element.height/window.devicePixelRatio - event.pageY - elementBounds.top - scrollY;
+            y = element.height/window.devicePixelRatio*2 - event.pageY - elementBounds.top - scrollY;
         }
 
         return { 
