@@ -18,7 +18,7 @@ var Common = require('../core/Common');
      * @param {HTMLElement} element
      * @return {mouse} A new mouse
      */
-    Mouse.create = function(element) {
+    Mouse.create = function(element, devicePixelRatio) {
         var mouse = {};
 
         if (!element) {
@@ -35,6 +35,7 @@ var Common = require('../core/Common');
         mouse.wheelDelta = 0;
         mouse.button = -1;
         mouse.pixelRatio = parseInt(mouse.element.getAttribute('data-pixel-ratio'), 10) || 1;
+        mouse.devicePixelRatio = devicePixelRatio || window.devicePixelRatio
 
         mouse.sourceEvents = {
             mousemove: null,
@@ -44,7 +45,7 @@ var Common = require('../core/Common');
         };
         
         mouse.mousemove = function(event) { 
-            var position = Mouse._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio),
+            var position = Mouse._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio, mouse.devicePixelRatio),
                 touches = event.changedTouches;
 
             if (touches) {
@@ -60,7 +61,7 @@ var Common = require('../core/Common');
         };
         
         mouse.mousedown = function(event) {
-            var position = Mouse._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio),
+            var position = Mouse._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio, mouse.devicePixelRatio),
                 touches = event.changedTouches;
 
             if (touches) {
@@ -80,7 +81,7 @@ var Common = require('../core/Common');
         };
         
         mouse.mouseup = function(event) {
-            var position = Mouse._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio),
+            var position = Mouse._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio, mouse.devicePixelRatio),
                 touches = event.changedTouches;
 
             if (touches) {
@@ -176,7 +177,7 @@ var Common = require('../core/Common');
      * @param {number} pixelRatio
      * @return {}
      */
-    Mouse._getRelativeMousePosition = function(event, element, pixelRatio) {
+    Mouse._getRelativeMousePosition = function(event, element, pixelRatio, realPixelRatio) {
         var elementBounds = element.getBoundingClientRect(),
             rootNode = (document.documentElement || document.body.parentNode || document.body),
             scrollX = (window.pageXOffset !== undefined) ? window.pageXOffset : rootNode.scrollLeft,
@@ -186,10 +187,10 @@ var Common = require('../core/Common');
         
         if (touches) {
             x = touches[0].pageX - elementBounds.left - scrollX;
-            y = element.height/(window.devicePixelRatio*2) - touches[0].pageY - elementBounds.top - scrollY;
+            y = element.height/realPixelRatio - touches[0].pageY - elementBounds.top - scrollY;
         } else {
             x = event.pageX - elementBounds.left - scrollX;
-            y = element.height/(window.devicePixelRatio*2) - event.pageY - elementBounds.top - scrollY;
+            y = element.height/realPixelRatio - event.pageY - elementBounds.top - scrollY;
         }
 
         return { 
